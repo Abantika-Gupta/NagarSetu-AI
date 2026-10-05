@@ -1,0 +1,26 @@
+# Service Level Agreement (SLA) Matrix
+default_sla_hours:
+  CRITICAL: 4
+  HIGH: 24
+  MEDIUM: 72
+  LOW: 168
+
+category_sla_overrides:
+  SEWERAGE:
+    CRITICAL: 2
+    HIGH: 12
+  STREETLIGHT:
+    HIGH: 24
+    MEDIUM: 48
+  DRAINAGE_FLOODING:
+    CRITICAL: 4
+    HIGH: 18
+  WATER_LEAKAGE:
+    CRITICAL: 3
+    HIGH: 12
+
+sla_status_definitions:
+  ON_TRACK: "Time elapsed < 70% of SLA hours"
+  AT_RISK: "Time elapsed >= 70% and <= 100% of SLA hours"
+  OVERDUE: "Time elapsed > 100% of SLA hours and complaint is not resolved"
+  RESOLVED: "Complaint status is Resolved, Citizen Verified, or Closed"

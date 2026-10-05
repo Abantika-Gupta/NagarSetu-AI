@@ -1,0 +1,24 @@
+{
+  "bmc_severity_to_canonical": {
+    "Low": "LOW",
+    "Medium": "MEDIUM",
+    "High": "HIGH",
+    "Critical": "CRITICAL",
+    "1": "LOW",
+    "2": "MEDIUM",
+    "3": "HIGH",
+    "4": "CRITICAL"
+  },
+  "canonical_to_urgency_display": {
+    "LOW": "Low",
+    "MEDIUM": "Medium",
+    "HIGH": "High",
+    "CRITICAL": "Critical"
+  },
+  "severity_to_base_score": {
+    "LOW": 25,
+    "MEDIUM": 50,
+    "HIGH": 75,
+    "CRITICAL": 95
+  }
+}

@@ -1,0 +1,63 @@
+# CivicFix / NagarSetu AI & ML Configuration
+random_seed: 42
+
+canonical_categories:
+  - ROADS_POTHOLES
+  - GARBAGE_SOLID_WASTE
+  - DRAINAGE_FLOODING
+  - STREETLIGHT
+  - WATER_SUPPLY
+  - WATER_LEAKAGE
+  - SEWERAGE
+  - PUBLIC_TOILET
+  - ILLEGAL_CONSTRUCTION
+  - ENCROACHMENT
+  - TREE_HAZARD
+  - AIR_NOISE_POLLUTION
+  - STRAY_ANIMAL
+  - PUBLIC_HEALTH
+  - OTHER
+
+severity_levels:
+  - LOW
+  - MEDIUM
+  - HIGH
+  - CRITICAL
+
+text_classifier:
+  model: tfidf_logistic_regression
+  ngram_range: [1, 2]
+  max_features: 10000
+  min_df: 2
+  C: 1.0
+
+severity_classifier:
+  model: logistic_regression
+  C: 1.0
+
+duplicate:
+  text_similarity_threshold: 0.80
+  geographic_distance_meters: 100
+  time_window_hours: 48
+
+vision:
+  architecture: efficientnet_b0
+  image_size: [224, 224]
+  classes:
+    - pothole
+    - garbage
+    - other_civic_issue
+    - non_issue
+
+priority:
+  severity_weight: 0.30
+  population_weight: 0.20
+  duplicate_weight: 0.15
+  safety_weight: 0.15
+  sla_weight: 0.10
+  recurrence_weight: 0.10
+
+confidence_thresholds:
+  automatic_recommendation: 0.80
+  recommendation_with_review: 0.60
+  manual_review: 0.0

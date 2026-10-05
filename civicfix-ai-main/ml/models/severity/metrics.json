@@ -1,0 +1,59 @@
+{
+  "model_name": "civic_severity_classifier_v1",
+  "model_version": "1.0.0",
+  "task": "severity_estimation",
+  "architecture": "RandomForestClassifier with ColumnTransformer (TF-IDF + Categorical + Numerical)",
+  "train_samples": 800,
+  "test_samples": 200,
+  "metrics": {
+    "accuracy": 0.245,
+    "precision": 0.3091,
+    "recall": 0.245,
+    "f1": 0.2172
+  },
+  "classes": [
+    "CRITICAL",
+    "HIGH",
+    "LOW",
+    "MEDIUM"
+  ],
+  "classification_report": {
+    "CRITICAL": {
+      "precision": 0.28,
+      "recall": 0.24561403508771928,
+      "f1-score": 0.2616822429906542,
+      "support": 57.0
+    },
+    "HIGH": {
+      "precision": 0.2537313432835821,
+      "recall": 0.38636363636363635,
+      "f1-score": 0.3063063063063063,
+      "support": 44.0
+    },
+    "LOW": {
+      "precision": 0.20987654320987653,
+      "recall": 0.3333333333333333,
+      "f1-score": 0.25757575757575757,
+      "support": 51.0
+    },
+    "MEDIUM": {
+      "precision": 0.5,
+      "recall": 0.020833333333333332,
+      "f1-score": 0.04,
+      "support": 48.0
+    },
+    "accuracy": 0.245,
+    "macro avg": {
+      "precision": 0.3109019716233647,
+      "recall": 0.24653608452950557,
+      "f1-score": 0.21639107671817953,
+      "support": 200.0
+    },
+    "weighted avg": {
+      "precision": 0.30913941404090656,
+      "recall": 0.245,
+      "f1-score": 0.21724864482154202,
+      "support": 200.0
+    }
+  }
+}

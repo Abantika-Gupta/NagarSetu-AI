@@ -1,0 +1,19 @@
+{
+  "model_name": "civic_duplicate_detector_v1",
+  "model_version": "1.0.0",
+  "task": "duplicate_detection",
+  "architecture": "Hybrid Multi-Modal (TF-IDF Cosine + Haversine Exponential Decay + Temporal Decay)",
+  "decision_threshold": 0.65,
+  "weights": {
+    "text_similarity": 0.4,
+    "geographic_proximity": 0.35,
+    "temporal_proximity": 0.15,
+    "category_match": 0.1
+  },
+  "metrics": {
+    "roc_auc": 0.9375,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0
+  }
+}

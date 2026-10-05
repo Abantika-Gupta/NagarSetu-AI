@@ -1,0 +1,51 @@
+{
+  "model_name": "bmc_satisfaction_predictor_v1",
+  "model_version": "1.0.0",
+  "task": "citizen_satisfaction_prediction",
+  "architecture": "GradientBoostingClassifier with OneHotEncoder",
+  "real_time_features_used": [
+    "canonical_category",
+    "canonical_severity",
+    "ward_code",
+    "complaint_channel",
+    "is_monsoon_season"
+  ],
+  "anti_leakage_verified": true,
+  "train_samples": 800,
+  "test_samples": 200,
+  "metrics": {
+    "roc_auc": 0.4906,
+    "pr_auc": 0.6973,
+    "accuracy": 0.645,
+    "precision": 0.6836,
+    "recall": 0.8897,
+    "f1": 0.7732
+  },
+  "classification_report": {
+    "0": {
+      "precision": 0.34782608695652173,
+      "recall": 0.125,
+      "f1-score": 0.1839080459770115,
+      "support": 64.0
+    },
+    "1": {
+      "precision": 0.6836158192090396,
+      "recall": 0.8897058823529411,
+      "f1-score": 0.7731629392971247,
+      "support": 136.0
+    },
+    "accuracy": 0.645,
+    "macro avg": {
+      "precision": 0.5157209530827807,
+      "recall": 0.5073529411764706,
+      "f1-score": 0.47853549263706807,
+      "support": 200.0
+    },
+    "weighted avg": {
+      "precision": 0.5761631048882339,
+      "recall": 0.645,
+      "f1-score": 0.5846013734346884,
+      "support": 200.0
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "bmc_columns": {
+    "identity": ["complaint_id"],
+    "time": ["complaint_date", "year", "month", "is_monsoon_season", "complaint_time_of_day"],
+    "geography": ["ward_code", "ward_area", "zone", "ward_type", "population_density", "ward_slum_percentage"],
+    "complaint": ["complaint_category", "department_assigned", "complaint_channel", "severity", "has_photo_evidence", "has_gps_location", "media_attention", "politically_sensitive"],
+    "complainant_context": ["complainant_type", "property_type", "repeat_complainant", "prior_complaints_count"],
+    "resolution_analytics_post_resolution": ["resolution_days", "num_reassignments", "complaint_status", "contractor_category", "work_quality_rating", "site_inspected", "defect_liability_claim", "estimated_cost_inr", "infrastructure_age_years", "months_since_last_maintained"],
+    "macro": ["regional_labor_shortage", "local_unemployment_rate"],
+    "target": ["citizen_satisfied"]
+  },
+  "nyc_311_columns": [
+    "unique_key", "created_date", "closed_date", "agency", "agency_name",
+    "complaint_type", "descriptor", "location_type", "incident_zip",
+    "incident_address", "street_name", "borough", "latitude", "longitude",
+    "status", "due_date", "resolution_description", "community_board",
+    "council_district", "police_precinct", "park_facility_name",
+    "park_borough", "vehicle_type"
+  ],
+  "normalized_nagarsetu_fields": [
+    "id", "external_id", "description", "category", "subcategory", "severity",
+    "severity_score", "latitude", "longitude", "address", "ward", "zone",
+    "city", "department", "complaint_channel", "created_at", "updated_at",
+    "resolved_at", "status", "image_url", "image_count", "has_image",
+    "ai_category", "ai_category_confidence", "ai_severity", "ai_severity_confidence",
+    "ai_department", "ai_department_confidence", "duplicate_group_id",
+    "duplicate_probability", "priority_score", "priority_level", "priority_reasons",
+    "sla_hours", "sla_deadline", "sla_status", "resolution_time_hours",
+    "citizen_satisfaction"
+  ]
+}

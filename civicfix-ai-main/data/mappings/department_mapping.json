@@ -1,0 +1,31 @@
+{
+  "canonical_to_department": {
+    "ROADS_POTHOLES": "Road Maintenance Department",
+    "GARBAGE_SOLID_WASTE": "Sanitation Department",
+    "DRAINAGE_FLOODING": "Drainage Department",
+    "STREETLIGHT": "Streetlight & Electricity Department",
+    "WATER_SUPPLY": "Water Supply Department",
+    "WATER_LEAKAGE": "Water Supply Department",
+    "SEWERAGE": "Drainage Department",
+    "PUBLIC_TOILET": "Sanitation Department",
+    "ILLEGAL_CONSTRUCTION": "Public Safety Department",
+    "ENCROACHMENT": "Traffic Department",
+    "TREE_HAZARD": "Parks & Environment Department",
+    "AIR_NOISE_POLLUTION": "Parks & Environment Department",
+    "STRAY_ANIMAL": "Public Safety Department",
+    "PUBLIC_HEALTH": "Health & Hygiene Department",
+    "OTHER": "General Civic Department"
+  },
+  "department_to_officer_role": {
+    "Road Maintenance Department": "DEPARTMENT_OFFICER",
+    "Sanitation Department": "DEPARTMENT_OFFICER",
+    "Drainage Department": "DEPARTMENT_OFFICER",
+    "Streetlight & Electricity Department": "DEPARTMENT_OFFICER",
+    "Water Supply Department": "DEPARTMENT_OFFICER",
+    "Public Safety Department": "DEPARTMENT_OFFICER",
+    "Parks & Environment Department": "DEPARTMENT_OFFICER",
+    "Traffic Department": "DEPARTMENT_OFFICER",
+    "Health & Hygiene Department": "DEPARTMENT_OFFICER",
+    "General Civic Department": "DEPARTMENT_OFFICER"
+  }
+}

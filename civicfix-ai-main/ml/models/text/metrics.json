@@ -1,0 +1,108 @@
+{
+  "model_name": "civic_text_classifier_v1",
+  "model_version": "1.0.0",
+  "task": "category_classification",
+  "architecture": "TfidfVectorizer + LogisticRegression",
+  "train_samples": 800,
+  "test_samples": 200,
+  "metrics": {
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  },
+  "classes": [
+    "DRAINAGE_FLOODING",
+    "ENCROACHMENT",
+    "GARBAGE_SOLID_WASTE",
+    "PUBLIC_HEALTH",
+    "ROADS_POTHOLES",
+    "SEWERAGE",
+    "STRAY_ANIMAL",
+    "STREETLIGHT",
+    "TREE_HAZARD",
+    "WATER_LEAKAGE",
+    "WATER_SUPPLY"
+  ],
+  "classification_report": {
+    "DRAINAGE_FLOODING": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 19.0
+    },
+    "ENCROACHMENT": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 19.0
+    },
+    "GARBAGE_SOLID_WASTE": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 18.0
+    },
+    "PUBLIC_HEALTH": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 18.0
+    },
+    "ROADS_POTHOLES": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 18.0
+    },
+    "SEWERAGE": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 18.0
+    },
+    "STRAY_ANIMAL": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 17.0
+    },
+    "STREETLIGHT": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 17.0
+    },
+    "TREE_HAZARD": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 18.0
+    },
+    "WATER_LEAKAGE": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 16.0
+    },
+    "WATER_SUPPLY": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 22.0
+    },
+    "accuracy": 1.0,
+    "macro avg": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 200.0
+    },
+    "weighted avg": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 200.0
+    }
+  }
+}

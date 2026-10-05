@@ -1,0 +1,62 @@
+# Department Routing Rules: Deterministic + ML-assisted
+department_routing:
+  ROADS_POTHOLES:
+    primary_department: "Road Maintenance Department"
+    agency_code: "RHO"
+    reason: "Pothole, pavement defect, or road surface degradation detected"
+  GARBAGE_SOLID_WASTE:
+    primary_department: "Sanitation Department"
+    agency_code: "SWM"
+    reason: "Solid waste, garbage dumping, or litter accumulation detected"
+  DRAINAGE_FLOODING:
+    primary_department: "Drainage Department"
+    agency_code: "SWD"
+    reason: "Stormwater drainage, flooding, or runoff blockage detected"
+  STREETLIGHT:
+    primary_department: "Streetlight & Electricity Department"
+    agency_code: "ELEC"
+    reason: "Electrical hazard, dark street, or non-functional lighting detected"
+  WATER_SUPPLY:
+    primary_department: "Water Supply Department"
+    agency_code: "HYD"
+    reason: "Municipal water supply deficit, low pressure, or water contamination detected"
+  WATER_LEAKAGE:
+    primary_department: "Water Supply Department"
+    agency_code: "HYD"
+    reason: "Water main or service pipeline rupture detected"
+  SEWERAGE:
+    primary_department: "Drainage Department"
+    agency_code: "SEW"
+    reason: "Sewer line blockage or hazardous open manhole detected"
+  PUBLIC_TOILET:
+    primary_department: "Sanitation Department"
+    agency_code: "SAN"
+    reason: "Public sanitation facility maintenance grievance detected"
+  ILLEGAL_CONSTRUCTION:
+    primary_department: "Public Safety Department"
+    agency_code: "BLD"
+    reason: "Building regulation violation or unauthorized structural work detected"
+  ENCROACHMENT:
+    primary_department: "Traffic Department"
+    agency_code: "ENC"
+    reason: "Public right-of-way obstruction or footpath encroachment detected"
+  TREE_HAZARD:
+    primary_department: "Parks & Environment Department"
+    agency_code: "PRK"
+    reason: "Dangerous vegetation, tree fall, or pruning requirement detected"
+  AIR_NOISE_POLLUTION:
+    primary_department: "Parks & Environment Department"
+    agency_code: "ENV"
+    reason: "Environmental emission or illegal acoustic disruption detected"
+  STRAY_ANIMAL:
+    primary_department: "Public Safety Department"
+    agency_code: "VET"
+    reason: "Animal control, rabies exposure risk, or stray carcass removal detected"
+  PUBLIC_HEALTH:
+    primary_department: "Health & Hygiene Department"
+    agency_code: "HLT"
+    reason: "Vector breeding or infectious public health hazard detected"
+  OTHER:
+    primary_department: "General Civic Department"
+    agency_code: "GEN"
+    reason: "General civic inquiry or unclassified issue requiring administrative triage"

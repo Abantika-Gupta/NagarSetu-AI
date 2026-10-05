@@ -1,0 +1,469 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import {
+  AlertTriangle,
+  Brain,
+  FilePlus2,
+  ImagePlus,
+  LocateFixed,
+  MapPin,
+  UploadCloud,
+  X,
+} from "lucide-react";
+import toast from "react-hot-toast";
+import { analyzeComplaint } from "../services/aiService";
+import { createComplaint } from "../services/complaintService";
+import { uploadComplaintImage } from "../services/uploadService";
+import PriorityScoreCard from "../components/PriorityScoreCard";
+import DuplicateAlertBox from "../components/DuplicateAlertBox";
+
+const categoryOptions = [
+  { value: "", label: "Auto Detect by AI" },
+  { value: "road", label: "Road" },
+  { value: "sanitation", label: "Sanitation" },
+  { value: "drainage", label: "Drainage" },
+  { value: "electricity", label: "Streetlight & Electricity" },
+  { value: "water", label: "Water Supply" },
+  { value: "safety", label: "Public Safety" },
+  { value: "environment", label: "Parks & Environment" },
+  { value: "traffic", label: "Traffic" },
+  { value: "health", label: "Health & Hygiene" },
+  { value: "other", label: "Other" },
+];
+
+const ReportIssue = () => {
+  const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({
+    title: "",
+    description: "",
+    category: "",
+    imageUrl: "",
+    address: "",
+    city: "Kolkata",
+    state: "West Bengal",
+    lat: "",
+    lng: "",
+  });
+
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [previewImage, setPreviewImage] = useState("");
+  const [analysis, setAnalysis] = useState(null);
+  const [duplicate, setDuplicate] = useState(null);
+  const [analyzing, setAnalyzing] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [locationLoading, setLocationLoading] = useState(false);
+
+  const handleChange = (event) => {
+    setFormData((prev) => ({
+      ...prev,
+      [event.target.name]: event.target.value,
+    }));
+  };
+
+  const handleImageChange = (event) => {
+    const file = event.target.files?.[0];
+
+    if (!file) return;
+
+    const allowedTypes = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
+
+    if (!allowedTypes.includes(file.type)) {
+      toast.error("Only JPG, PNG, and WEBP images are allowed");
+      return;
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+      toast.error("Image must be less than 5MB");
+      return;
+    }
+
+    setSelectedImage(file);
+    setPreviewImage(URL.createObjectURL(file));
+
+    setFormData((prev) => ({
+      ...prev,
+      imageUrl: "",
+    }));
+  };
+
+  const removeImage = () => {
+    setSelectedImage(null);
+    setPreviewImage("");
+    setFormData((prev) => ({
+      ...prev,
+      imageUrl: "",
+    }));
+  };
+
+  const validateBasic = () => {
+    if (!formData.title.trim()) {
+      toast.error("Title is required");
+      return false;
+    }
+
+    if (formData.title.trim().length < 5) {
+      toast.error("Title must be at least 5 characters");
+      return false;
+    }
+
+    if (!formData.description.trim()) {
+      toast.error("Description is required");
+      return false;
+    }
+
+    if (formData.description.trim().length < 10) {
+      toast.error("Description must be at least 10 characters");
+      return false;
+    }
+
+    if (!formData.address.trim()) {
+      toast.error("Address is required");
+      return false;
+    }
+
+    return true;
+  };
+
+  const handleGetLocation = () => {
+    if (!navigator.geolocation) {
+      toast.error("Geolocation is not supported by this browser.");
+      return;
+    }
+
+    setLocationLoading(true);
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setFormData((prev) => ({
+          ...prev,
+          lat: position.coords.latitude.toFixed(6),
+          lng: position.coords.longitude.toFixed(6),
+        }));
+        toast.success("Location captured successfully");
+        setLocationLoading(false);
+      },
+      () => {
+        toast.error("Unable to get location. Please enter manually.");
+        setLocationLoading(false);
+      }
+    );
+  };
+
+  const handleAnalyze = async () => {
+    if (!validateBasic()) return;
+
+    setAnalyzing(true);
+    setAnalysis(null);
+
+    try {
+      const data = await analyzeComplaint({
+        title: formData.title,
+        description: formData.description,
+        category: formData.category,
+        latitude: formData.lat ? Number(formData.lat) : undefined,
+        longitude: formData.lng ? Number(formData.lng) : undefined,
+        imageUrl: formData.imageUrl || undefined,
+      });
+
+      setAnalysis(data);
+
+      if (data.duplicate_probability >= 0.6 || data.is_duplicate) {
+        setDuplicate({
+          isDuplicate: true,
+          similarityScore: Math.round((data.duplicate_probability || 0.75) * 100),
+          reason: "Similar civic issue detected within spatial and temporal proximity",
+        });
+      }
+
+      toast.success("AI triage analysis completed");
+    } catch (error) {
+      toast.error(error.message || "AI analysis failed");
+    } finally {
+      setAnalyzing(false);
+    }
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    if (!validateBasic()) return;
+
+    setSubmitting(true);
+    setDuplicate(null);
+
+    try {
+      let finalImageUrl = formData.imageUrl;
+
+      if (selectedImage) {
+        toast.loading("Uploading image...", { id: "image-upload" });
+        const uploadData = await uploadComplaintImage(selectedImage);
+        finalImageUrl = uploadData.imageUrl;
+        toast.success("Image uploaded", { id: "image-upload" });
+      }
+
+      const payload = {
+        title: formData.title,
+        description: formData.description,
+        category: formData.category,
+        imageUrl: finalImageUrl,
+        location: {
+          address: formData.address,
+          city: formData.city,
+          state: formData.state,
+          lat: formData.lat ? Number(formData.lat) : null,
+          lng: formData.lng ? Number(formData.lng) : null,
+        },
+      };
+
+      const data = await createComplaint(payload);
+
+      setAnalysis(data.ai || {
+        category: data.complaint.category,
+        urgency: data.complaint.urgency,
+        aiScore: data.complaint.aiScore,
+        department: data.complaint.department,
+        aiReason: data.complaint.aiReason,
+        priority: {
+          score: data.complaint.priorityScore || data.complaint.aiScore,
+          level: data.complaint.priorityLevel || "MEDIUM",
+          reasons: data.complaint.priorityReasons || [],
+        },
+        sla: {
+          hours: data.complaint.slaHours || 72,
+          status: data.complaint.slaStatus || "ON_TRACK",
+        }
+      });
+
+      setDuplicate(data.duplicate);
+
+      toast.success("Complaint submitted successfully");
+
+      setTimeout(() => {
+        navigate(`/complaints/${data.complaint._id}`);
+      }, 900);
+    } catch (error) {
+      toast.error(error.message || "Complaint submission failed");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  return (
+    <main className="complaint-page">
+      <section className="complaint-header">
+        <div>
+          <span>Citizen Complaint</span>
+          <h1>Report a Civic Issue</h1>
+          <p>
+            Submit issue details with location. NagarSetu will analyze
+            category, priority, urgency, and department routing.
+          </p>
+        </div>
+      </section>
+
+      <div className="complaint-layout">
+        <section className="complaint-form-card">
+          <form onSubmit={handleSubmit} className="complaint-form">
+            <label className="full-field">
+              Issue Title
+              <input
+                type="text"
+                name="title"
+                placeholder="Example: Open electric wire near school"
+                value={formData.title}
+                onChange={handleChange}
+                required
+              />
+            </label>
+
+            <label className="full-field">
+              Description
+              <textarea
+                name="description"
+                placeholder="Describe the issue clearly..."
+                value={formData.description}
+                onChange={handleChange}
+                required
+              />
+            </label>
+
+            <label>
+              Category
+              <select
+                name="category"
+                value={formData.category}
+                onChange={handleChange}
+              >
+                {categoryOptions.map((item) => (
+                  <option value={item.value} key={item.value}>
+                    {item.label}
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            <div className="image-upload-section">
+              <label>
+                Upload Issue Image
+                <div className="file-upload-box">
+                  <UploadCloud size={20} />
+                  <span>
+                    {selectedImage ? selectedImage.name : "Choose image from device"}
+                  </span>
+                  <input
+                    type="file"
+                    accept="image/png,image/jpeg,image/jpg,image/webp"
+                    onChange={handleImageChange}
+                  />
+                </div>
+              </label>
+
+              <label>
+                Or Paste Image URL
+                <div className="input-with-icon">
+                  <ImagePlus size={18} />
+                  <input
+                    type="url"
+                    name="imageUrl"
+                    placeholder="Paste image URL"
+                    value={formData.imageUrl}
+                    onChange={handleChange}
+                    disabled={Boolean(selectedImage)}
+                  />
+                </div>
+              </label>
+            </div>
+
+            {(previewImage || formData.imageUrl) && (
+              <div className="image-preview-box full-field">
+                <button type="button" onClick={removeImage}>
+                  <X size={18} />
+                </button>
+                <img
+                  src={previewImage || formData.imageUrl}
+                  alt="Complaint preview"
+                />
+              </div>
+            )}
+
+            <label className="full-field">
+              Address
+              <div className="input-with-icon">
+                <MapPin size={18} />
+                <input
+                  type="text"
+                  name="address"
+                  placeholder="Enter exact issue location"
+                  value={formData.address}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+            </label>
+
+            <label>
+              City
+              <input
+                type="text"
+                name="city"
+                placeholder="Enter city"
+                value={formData.city}
+                onChange={handleChange}
+              />
+            </label>
+
+            <label>
+              State
+              <input
+                type="text"
+                name="state"
+                placeholder="Enter state"
+                value={formData.state}
+                onChange={handleChange}
+              />
+            </label>
+
+            <label>
+              Latitude
+              <input
+                type="number"
+                step="any"
+                name="lat"
+                placeholder="Auto/manual latitude"
+                value={formData.lat}
+                onChange={handleChange}
+              />
+            </label>
+
+            <label>
+              Longitude
+              <input
+                type="number"
+                step="any"
+                name="lng"
+                placeholder="Auto/manual longitude"
+                value={formData.lng}
+                onChange={handleChange}
+              />
+            </label>
+
+            <button
+              type="button"
+              className="secondary-action-btn full-field"
+              onClick={handleGetLocation}
+              disabled={locationLoading}
+            >
+              <LocateFixed size={18} />
+              {locationLoading ? "Getting location..." : "Use My Current Location"}
+            </button>
+
+            <div className="form-actions full-field">
+              <button
+                type="button"
+                className="secondary-btn"
+                onClick={handleAnalyze}
+                disabled={analyzing}
+              >
+                <Brain size={18} />
+                {analyzing ? "Analyzing..." : "Preview AI Score"}
+              </button>
+
+              <button className="primary-btn" disabled={submitting}>
+                <FilePlus2 size={18} />
+                {submitting ? "Submitting..." : "Submit Complaint"}
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <aside className="complaint-side">
+          {analysis ? (
+            <PriorityScoreCard analysis={analysis} />
+          ) : (
+            <div className="ai-placeholder">
+              <Brain size={42} />
+              <h3>AI Analysis Preview</h3>
+              <p>
+                Fill complaint details and click “Preview AI Score” to see
+                category, urgency, department, and AI reason.
+              </p>
+            </div>
+          )}
+
+          <DuplicateAlertBox duplicate={duplicate} />
+
+          <div className="info-note">
+            <AlertTriangle size={18} />
+            <p>
+              You can upload an issue photo from your device or paste an image
+              URL. Uploaded images are stored using Cloudinary.
+            </p>
+          </div>
+        </aside>
+      </div>
+    </main>
+  );
+};
+
+export default ReportIssue;

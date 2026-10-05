@@ -1,0 +1,31 @@
+{
+  "name": "civicfix-ai",
+  "version": "1.0.0",
+  "description": "NagarSetu - Connecting Citizens. Solving Cities. MERN based smart civic complaint management system",
+  "main": "index.js",
+  "scripts": {
+    "install-all": "npm install --prefix backend && npm install --prefix frontend",
+    "dev:backend": "npm run dev --prefix backend",
+    "dev:frontend": "npm run dev --prefix frontend",
+    "build": "npm install --prefix backend && npm install --include=dev --prefix frontend && npm run build --prefix frontend",
+    "start": "npm start --prefix backend",
+    "test": "node tests/test_backend_ai.js && python tests/test_dataset_validation.py && python tests/test_ai_pipeline.py",
+    "test:ai": "python tests/test_ai_pipeline.py",
+    "test:data": "python tests/test_dataset_validation.py",
+    "train:models": "python scripts/train_models.py",
+    "process:data": "python scripts/process_datasets.py"
+  },
+  "engines": {
+    "node": "22.x"
+  },
+  "keywords": [
+    "mern",
+    "nagarsetu",
+    "civicfix",
+    "smart-city",
+    "ai-assisted",
+    "complaint-management"
+  ],
+  "author": "NagarSetu Team",
+  "license": "ISC"
+}

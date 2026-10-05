@@ -1,0 +1,77 @@
+# Canonical Civic Categories & Multilingual Synonyms
+categories:
+  ROADS_POTHOLES:
+    display_name: "Roads & Potholes"
+    legacy_code: "road"
+    description: "Damaged road, potholes, crater, asphalt collapse, broken pavement, footpath breakage"
+    keywords: ["road", "pothole", "gaddha", "sadak", "rasta", "potholes", "crater", "footpath", "broken road", "tar"]
+  GARBAGE_SOLID_WASTE:
+    display_name: "Garbage & Solid Waste"
+    legacy_code: "sanitation"
+    description: "Overflowing garbage dump, uncollected waste, trash, littering, bio waste"
+    keywords: ["garbage", "waste", "kachra", "dustbin", "trash", "dumping", "moyla", "aborjona", "litter", "rubbish"]
+  DRAINAGE_FLOODING:
+    display_name: "Drainage & Flooding"
+    legacy_code: "drainage"
+    description: "Waterlogging, choked stormwater drain, monsoon flooding, blocked culvert"
+    keywords: ["drain", "drainage", "waterlogging", "nala", "flood", "stagnant water", "choked drain", "overflow"]
+  STREETLIGHT:
+    display_name: "Streetlight & Electrical"
+    legacy_code: "electricity"
+    description: "Dark street, non-functional light, blinking lamp, fallen electric pole, live wire"
+    keywords: ["streetlight", "street light", "light", "pole", "wire", "dark", "andhera", "bulb", "fuse", "bijli"]
+  WATER_SUPPLY:
+    display_name: "Water Supply"
+    legacy_code: "water"
+    description: "Low pressure, no municipal water supply, contaminated water, yellow water"
+    keywords: ["water supply", "no water", "drinking water", "pani nahi aa raha", "jal", "tanker", "contaminated water"]
+  WATER_LEAKAGE:
+    display_name: "Water Leakage & Pipeline Burst"
+    legacy_code: "water"
+    description: "Main pipeline burst, clean water gushing onto road, valve leakage"
+    keywords: ["pipeline burst", "pipe leak", "water gushing", "leakage", "water line broken", "wasting water"]
+  SEWERAGE:
+    display_name: "Sewerage & Manholes"
+    legacy_code: "drainage"
+    description: "Open manhole, sewer overflow, foul sewer odor, blocked underground sewer line"
+    keywords: ["open manhole", "manhole", "sewer", "sewage", "gutter", "chamber open", "sewer stench"]
+  PUBLIC_TOILET:
+    display_name: "Public Toilet & Sanitation"
+    legacy_code: "sanitation"
+    description: "Dirty public toilet, broken taps, lack of water in community restroom"
+    keywords: ["public toilet", "toilet", "urinal", "sulabh", "shauchalay", "restroom", "commode broken"]
+  ILLEGAL_CONSTRUCTION:
+    display_name: "Illegal Construction"
+    legacy_code: "safety"
+    description: "Unauthorized building, construction without permit, floor violation"
+    keywords: ["illegal construction", "unauthorized floor", "illegal building", "building without permission", "encroaching structure"]
+  ENCROACHMENT:
+    display_name: "Encroachment & Footpath Blocking"
+    legacy_code: "traffic"
+    description: "Hawker occupying footpath, illegal stall, parking encroachment on public land"
+    keywords: ["encroachment", "hawker", "footpath blocked", "illegal stall", "kabza", "pedestrian blocked"]
+  TREE_HAZARD:
+    display_name: "Tree Hazard & Trimming"
+    legacy_code: "environment"
+    description: "Fallen branch, dangerous tree tilting over power lines, overgrown branches"
+    keywords: ["fallen tree", "tree branch", "tree falling", "ped gir gaya", "tree trimming", "dangerous branch"]
+  AIR_NOISE_POLLUTION:
+    display_name: "Air & Noise Pollution"
+    legacy_code: "environment"
+    description: "Illegal burning of waste, toxic smoke, loud industrial generator noise at night"
+    keywords: ["air pollution", "garbage burning", "toxic smoke", "dust pollution", "loudspeaker", "noise pollution"]
+  STRAY_ANIMAL:
+    display_name: "Stray Animals & Rabies Risk"
+    legacy_code: "safety"
+    description: "Aggressive stray dogs, cattle wandering on road, dog bite hazard, dead animal removal"
+    keywords: ["stray dog", "dog bite", "rabid dog", "cattle on road", "cow blocking", "dead animal carcass"]
+  PUBLIC_HEALTH:
+    display_name: "Public Health & Epidemic Prevention"
+    legacy_code: "health"
+    description: "Dengue/malaria mosquito breeding, open hospital waste, contaminated food stall"
+    keywords: ["dengue", "malaria", "mosquito breeding", "epidemic", "dirty clinic", "food safety", "fogging needed"]
+  OTHER:
+    display_name: "Other Civic Issues"
+    legacy_code: "other"
+    description: "General civic grievances not falling into specific categories"
+    keywords: ["general", "other", "inquiry", "unclear", "misc"]

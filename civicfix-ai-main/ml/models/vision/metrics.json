@@ -1,0 +1,85 @@
+{
+  "model_name": "civic_vision_classifier_v1",
+  "model_version": "1.0.0",
+  "task": "civic_image_evidence_classification",
+  "architecture": "MobileNetV3 / EfficientNet-B0 visual feature probe + Logistic Regression",
+  "classes": [
+    "pothole",
+    "garbage",
+    "other_civic_issue",
+    "non_issue"
+  ],
+  "train_samples": 450,
+  "test_samples": 150,
+  "metrics": {
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  },
+  "confusion_matrix": [
+    [
+      37,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      38,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      38,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      37
+    ]
+  ],
+  "classification_report": {
+    "garbage": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 38.0
+    },
+    "non_issue": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 37.0
+    },
+    "other_civic_issue": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 38.0
+    },
+    "pothole": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 37.0
+    },
+    "accuracy": 1.0,
+    "macro avg": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 150.0
+    },
+    "weighted avg": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 150.0
+    }
+  }
+}
